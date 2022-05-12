@@ -3,9 +3,16 @@ package org.dng;
 import java.util.HashSet;
 import java.util.Random;
 
-
-public class Game implements addPlayer2Game, PlayGame{
+/**
+ * this class tasks are:
+ * registration players, choose a winner
+ * this entity defines fact characterized by the following properties:
+ * - uniqueness (it can be only once)
+ * - has at least two players
+ */
+public class Game implements IGameService{
     private HashSet<Player> players;
+    private String gameName;
 
     /**
      * add player to storage of Players
@@ -15,6 +22,10 @@ public class Game implements addPlayer2Game, PlayGame{
     @Override
     public void addPlayer(Player pl){
         players.add(pl);
+    }
+
+    public HashSet<Player> getPlayers() {
+        return players;
     }
 
     /**
@@ -28,5 +39,14 @@ public class Game implements addPlayer2Game, PlayGame{
         int maxId = players.size()-1;
         int winnerId = (new Random().ints(minId, maxId)).limit(1).findFirst().orElse(0);
         return (Player) players.toArray()[winnerId];
+    }
+
+    @Override
+    public boolean Play() {
+        if(players.size()<2)
+            return false;
+
+        new Service().increaseRating(ChooseWinner());
+        return true;
     }
 }

@@ -1,5 +1,6 @@
 package org.dng;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -12,6 +13,7 @@ import java.util.Random;
  */
 public class Game implements IGameService{
     private HashSet<Player> players;
+    private HashMap<Player, Integer> playerAndRating;
     private String gameName;
 
     /**
@@ -22,6 +24,7 @@ public class Game implements IGameService{
     @Override
     public void addPlayer(Player pl){
         players.add(pl);
+        playerAndRating.put(pl, pl.getPlayerRating());//fix ratings of players, that takes part in this game
     }
 
     public HashSet<Player> getPlayers() {
@@ -43,10 +46,20 @@ public class Game implements IGameService{
 
     @Override
     public boolean Play() {
-        if(players.size()<2)
+        if(players.size()<2) {
+            switch (players.size()){
+                case 0 ->{
+                    System.out.println("There are no players to play game!");
+                }
+                case 1 ->{
+                    System.out.println("The game with only one player is called `Elections` - go to central electoral committee ;)" );
+                }
+            }
             return false;
-
-        new Service().increaseRating(ChooseWinner());
+        }
+        Player winner = ChooseWinner();
+        Service.increaseRating(winner);
+        playerAndRating.put(winner, winner.getPlayerRating());//save rating for player in current game
         return true;
     }
 }

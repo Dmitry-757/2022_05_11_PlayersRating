@@ -12,6 +12,13 @@ public class Player {
     private Set<Game> gamesSet;
     private int playerRating;
 
+    public Player(String nicName) throws Exception {
+        if(MainApp.playersNicSet.contains(nicName))
+            throw new Exception("Player cant be created! NicName `"+nicName+"` already exist!");
+        this.nicName = nicName;
+        MainApp.playersNicSet.add(nicName);
+    }
+
     public void increasePlayerRating(){
         this.playerRating++;
     }

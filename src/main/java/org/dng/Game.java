@@ -18,7 +18,12 @@ public class Game implements IGameService {
 
     public Game() {
         Service.addGame2Set(this);
+        gameName = "game_"+Service.getGameSet().size();
         Service.log("Instance of Game created");
+    }
+
+    public String getGameName() {
+        return gameName;
     }
 
     /**
@@ -57,6 +62,10 @@ public class Game implements IGameService {
         int minId = 0;
         int maxId = players.size() - 1;
         int winnerId = (new Random().ints(minId, maxId)).limit(1).findFirst().orElse(0);
+
+        //plug!!!
+//        winnerId = 0;
+
         Player winner = (Player) players.toArray()[winnerId];
         Service.log("Game.ChooseWinner() winner = `" + winner.getNicName() + "` done successfully");
 

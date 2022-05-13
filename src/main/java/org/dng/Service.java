@@ -9,30 +9,22 @@ public class Service {
     static Set<Game> gameSet = new HashSet<>();
     private static String log = "";
 
-    //add record of method result in to log
-    public static void log(String record) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(log);
-        sb.append(record).append("\n");
-        log = sb.toString();
-    }
-
-    public static void logPrint() {
-        System.out.println(log);
-    }
-
+    //add player to set of players
     public static void addPlayer2Set(Player player) {
         Service.playerSet.add(player);
     }
 
+    //add game to set of games
     public static void addGame2Set(Game game) {
         Service.gameSet.add(game);
     }
 
+    //get all players
     public static Set<Player> getPlayerSet() {
         return playerSet;
     }
 
+    //get all games
     public static Set<Game> getGameSet() {
         return gameSet;
     }
@@ -61,7 +53,7 @@ public class Service {
     public static List<Player> get10BestPlayers(Game game) {
         return game.getPlayers().stream()
 //                .sorted((o1, o2) -> o1.getPlayerRating() - o2.getPlayerRating())
-                .sorted(Comparator.comparingInt(Player::getPlayerRating))
+                .sorted(Comparator.comparingInt(Player::getPlayerRating).reversed())
 //                .distinct()
                 .limit(10)
                 .toList();
@@ -72,9 +64,23 @@ public class Service {
     public static List<Player> get10BestPlayers(Set<Game> games) {
         return games.stream()
                 .flatMap((g) -> g.getPlayers().stream())
-                .sorted(Comparator.comparingInt(Player::getPlayerRating))
+                .sorted(Comparator.comparingInt(Player::getPlayerRating).reversed())
                 .distinct()
                 .limit(10)
                 .toList();
     }
+
+    // ********** logging ********************
+    //add record of method result in to log
+    public static void log(String record) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(log);
+        sb.append(record).append("\n");
+        log = sb.toString();
+    }
+
+    public static void logPrint() {
+        System.out.println(log);
+    }
+
 }

@@ -12,9 +12,13 @@ import java.util.Random;
  * - has at least two players
  */
 public class Game implements IGameService{
-    private HashSet<Player> players;
-    private HashMap<Player, Integer> playerAndRating;
+    private HashSet<Player> players = new HashSet<>();
+    private HashMap<Player, Integer> playerAndRating = new HashMap<>();
     private String gameName;
+
+    public Game() {
+        Service.log("Instance of Game created");
+    }
 
     /**
      * add player to storage of Players
@@ -23,12 +27,21 @@ public class Game implements IGameService{
      */
     @Override
     public void addPlayer(Player pl){
-        players.add(pl);
-        playerAndRating.put(pl, pl.getPlayerRating());//fix ratings of players, that takes part in this game
+        if (pl != null) {
+            players.add(pl);
+            playerAndRating.put(pl, pl.getPlayerRating());//fix ratings of players, that takes part in this game
+            Service.log("Game.addPlayer(player) player = `"+pl.getNicName()+"` done successfully");
+        }
+        else
+            System.out.println("Cant add. Player is undefined!");
     }
 
     public HashSet<Player> getPlayers() {
         return players;
+    }
+
+    public HashMap<Player, Integer> getPlayerAndRating() {
+        return playerAndRating;
     }
 
     /**
@@ -41,7 +54,10 @@ public class Game implements IGameService{
         int minId = 0;
         int maxId = players.size()-1;
         int winnerId = (new Random().ints(minId, maxId)).limit(1).findFirst().orElse(0);
-        return (Player) players.toArray()[winnerId];
+        Player winner = (Player) players.toArray()[winnerId];
+        Service.log("Game.ChooseWinner() winner = `"+winner.getNicName()+"` done successfully");
+
+        return winner;
     }
 
     @Override
@@ -60,6 +76,9 @@ public class Game implements IGameService{
         Player winner = ChooseWinner();
         Service.increaseRating(winner);
         playerAndRating.put(winner, winner.getPlayerRating());//save rating for player in current game
+
+        Service.log("Game.Play() winner = `"+winner.getNicName()+"` done successfully");
+
         return true;
     }
 }

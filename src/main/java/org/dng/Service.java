@@ -9,6 +9,11 @@ public class Service {
     private static Set<Game> gameSet = new HashSet<>();
     private static String log = "";
 
+    //for tests
+    public static void Clear(){
+        playersNicSet.clear();
+        gameSet.clear();
+    }
 
     //add game to set of games
     public static void addGame2Set(Game game) {

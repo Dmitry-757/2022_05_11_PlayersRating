@@ -1,5 +1,6 @@
 package org.dng;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +15,8 @@ public class Player {
     private int playerRating;
 
     public Player(String nicName) throws Exception {
+        HashMap<String, Player> playerHashMap = Service.getPlayersNicSet();
+
         if (Service.getPlayersNicSet().containsKey(nicName)) {
             Service.log("Instance of Player cant be created! NicName `" + nicName + "` already exist!");
             throw new Exception("Player cant be created! NicName `" + nicName + "` already exist!");

@@ -49,6 +49,7 @@ public class Service {
         for (Player player : players) {
             gamesSet.addAll(player.getGamesSet());
         }
+
         return gamesSet;
     }
 

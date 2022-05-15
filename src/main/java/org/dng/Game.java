@@ -15,11 +15,16 @@ public class Game implements IGameService {
     private HashSet<Player> players = new HashSet<>();
     private HashMap<Player, Integer> playerAndRating = new HashMap<>();
     private String gameName;
+    private boolean gamePlayed = false;
 
     public Game() {
         Service.addGame2Set(this);
         gameName = "game_"+Service.getGameSet().size();
         Service.log("Instance of Game created");
+    }
+
+    public boolean isGamePlayed() {
+        return gamePlayed;
     }
 
     public String getGameName() {
@@ -81,9 +86,15 @@ public class Game implements IGameService {
             }
             return false;
         }
+        if (this.gamePlayed){
+            System.out.println("Game has been already played! Go to central electoral committee ;)");
+            return false;
+        }
+
         Player winner = ChooseWinner();
         Service.increaseRating(winner);
         playerAndRating.put(winner, winner.getPlayerRating());//save rating for player in current game
+        this.gamePlayed = true;
 
         Service.log("Game.Play() winner = `" + winner.getNicName() + "` done successfully");
 

@@ -92,7 +92,78 @@ class ServiceTest {
     }
 
     @Test
+    void PlayGameWithNoOnePlayer() {
+        Game game1 = new Game();
+        Assertions.assertEquals(game1.Play(),false);
+        //the property gamePlayed must not be changed
+        Assertions.assertEquals(game1.isGamePlayed(),false);
+    }
+
+    @Test
+    void PlayGameWithOnePlayer() {
+        Player p1 = null, p2 = null;
+
+        try {
+            p1 = new Player("Petrov");
+//            p2 = new Player("Sidorov");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        Game game1 = new Game();
+        game1.addPlayer(p1);
+        game1.addPlayer(p2);
+
+        Assertions.assertEquals(game1.Play(),false);
+    }
+
+
+    @Test
+    void PlayTheSameGameTwice() {
+        Player p1 = null, p2 = null;
+
+        try {
+            p1 = new Player("Petrov");
+            p2 = new Player("Sidorov");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        Game game1 = new Game();
+        game1.addPlayer(p1);
+        game1.addPlayer(p2);
+        game1.Play();
+        Assertions.assertEquals(game1.Play(),false);
+    }
+
+
+    @Test
     void getPlayersRating() {
+        Player p1 = null, p2 = null, p3 = null;
+
+        try {
+            p1 = new Player("Petrov");
+            p2 = new Player("Sidorov");
+            p3 = new Player("Pupkin");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        Game game1 = new Game();
+        game1.addPlayer(p1);
+        game1.addPlayer(p2);
+        game1.Play();
+
+        Game game2 = new Game();
+        game2.addPlayer(p1);
+        game2.addPlayer(p3);
+        game2.Play();
+
+        Game game3 = new Game();
+        game3.addPlayer(p2);
+        game3.addPlayer(p3);
+        game3.Play();
+
     }
 
     @Test

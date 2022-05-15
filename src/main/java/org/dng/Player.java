@@ -14,12 +14,12 @@ public class Player {
     private int playerRating;
 
     public Player(String nicName) throws Exception {
-        if (Service.playersNicSet.containsKey(nicName)) {
+        if (Service.getPlayersNicSet().containsKey(nicName)) {
             Service.log("Instance of Player cant be created! NicName `" + nicName + "` already exist!");
             throw new Exception("Player cant be created! NicName `" + nicName + "` already exist!");
         }
         this.nicName = nicName;
-        Service.playersNicSet.put(nicName, this);
+        Service.addPlayerNic2Set(nicName, this);
         Service.addPlayer2Set(this);
         Service.log("Instance of Player nicName = `" + nicName + "` created");
     }

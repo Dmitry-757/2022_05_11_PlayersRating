@@ -4,9 +4,9 @@ import java.util.*;
 
 //public class Service implements IStatisticService{
 public class Service {
-    static HashMap<String, Player> playersNicSet = new HashMap<>();
-    static Set<Player> playerSet = new HashSet<>();
-    static Set<Game> gameSet = new HashSet<>();
+    private static HashMap<String, Player> playersNicSet = new HashMap<>();
+    private static Set<Player> playerSet = new HashSet<>();
+    private static Set<Game> gameSet = new HashSet<>();
     private static String log = "";
 
     //add player to set of players
@@ -27,6 +27,14 @@ public class Service {
     //get all games
     public static Set<Game> getGameSet() {
         return gameSet;
+    }
+
+    public static HashMap<String, Player> getPlayersNicSet() {
+        return playersNicSet;
+    }
+
+    public static void addPlayerNic2Set(String nicName, Player player) {
+        Service.playersNicSet.put(nicName, player);
     }
 
     //добавляет рейтинг игроку, в случае его выигрыша в игре

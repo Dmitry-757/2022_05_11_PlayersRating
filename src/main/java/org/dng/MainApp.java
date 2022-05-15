@@ -33,24 +33,12 @@ public class MainApp {
             System.out.println(e.getMessage());
         }
 
-
+//    регистрирует игроков в системе (должна быть проверка, занят ли ник)
         Game game1 = new Game();
         game1.addPlayer(p1);
         game1.addPlayer(p1);
-//        System.out.println("players:");
-//        for (Player pl:game1.getPlayers()){
-//            System.out.println(pl.getNicName());
-//        }
         game1.addPlayer(p2);
-//        System.out.println("players:");
-//        for (Player pl:game1.getPlayers()){
-//            System.out.println(pl.getNicName());
-//        }
         game1.addPlayer(p3);
-//        System.out.println("players:");
-//        for (Player pl:game1.getPlayers()){
-//            System.out.println(pl.getNicName());
-//        }
         game1.Play();
 
         Game game2 = new Game();
@@ -67,7 +55,7 @@ public class MainApp {
 
 //    выводит список игр, в которые играют все игроки на сайте
         System.out.println("список игр, в которые играют все игроки на сайте");
-        Set<Game> gs = Service.getAllPlayersGamesList(Service.playerSet);
+        Set<Game> gs = Service.getAllPlayersGamesList(Service.getPlayerSet());
         for (Game g:gs ) {
             System.out.println(g.getGameName());
         }

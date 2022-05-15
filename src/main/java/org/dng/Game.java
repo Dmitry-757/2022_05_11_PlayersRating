@@ -38,14 +38,16 @@ public class Game implements IGameService {
      * @param pl - player
      */
     @Override
-    public void addPlayer(Player pl) {
+    public boolean addPlayer(Player pl) {
         if (pl != null) {
             players.add(pl);
             pl.addGame(this);
             playerAndRating.put(pl, pl.getPlayerRating());//fix ratings of players, that takes part in this game
             Service.log("Game.addPlayer(player) player = `" + pl.getNicName() + "` done successfully");
+            return true;
         } else
             System.out.println("Cant add. Player is undefined!");
+        return false;
     }
 
     public HashSet<Player> getPlayers() {

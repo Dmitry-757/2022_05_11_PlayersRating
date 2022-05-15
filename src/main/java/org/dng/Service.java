@@ -1,28 +1,20 @@
 package org.dng;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 //public class Service implements IStatisticService{
 public class Service {
     private static HashMap<String, Player> playersNicSet = new HashMap<>();
-    private static Set<Player> playerSet = new HashSet<>();
     private static Set<Game> gameSet = new HashSet<>();
     private static String log = "";
 
-    //add player to set of players
-    public static void addPlayer2Set(Player player) {
-        Service.playerSet.add(player);
-    }
 
     //add game to set of games
     public static void addGame2Set(Game game) {
         Service.gameSet.add(game);
     }
 
-    //get all players
-    public static Set<Player> getPlayerSet() {
-        return playerSet;
-    }
 
     //get all games
     public static Set<Game> getGameSet() {
@@ -31,6 +23,10 @@ public class Service {
 
     public static HashMap<String, Player> getPlayersNicSet() {
         return playersNicSet;
+    }
+
+    public static Set<Player> getPlayerSet() {
+        return playersNicSet.values().stream().collect(Collectors.toSet());
     }
 
     public static void addPlayerNic2Set(String nicName, Player player) {

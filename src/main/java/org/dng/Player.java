@@ -20,7 +20,7 @@ public class Player {
         }
         this.nicName = nicName;
         Service.addPlayerNic2Set(nicName, this);
-        Service.addPlayer2Set(this);
+        //Service.addPlayer2Set(this);
         Service.log("Instance of Player nicName = `" + nicName + "` created");
     }
 

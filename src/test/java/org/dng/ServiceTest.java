@@ -53,11 +53,6 @@ class ServiceTest {
 
 
 //    выводит список игр, в которые играют все игроки на сайте
-//        System.out.println("список игр, в которые играют все игроки на сайте");
-//        Set<Game> gs = Service.getAllPlayersGamesList(Service.getPlayerSet());
-//        for (Game g:gs ) {
-//            System.out.println(g.getGameName());
-//        }
     @Test
     void getAllPlayersGamesList() {
         Player p1 = null, p2 = null, p3 = null;
@@ -166,10 +161,12 @@ class ServiceTest {
 
     }
 
+    //выводит 10 лучших игроков в определенной игре
     @Test
     void get10BestPlayers() {
     }
 
+    //выводит 10 лучших игроков с учетом всех игр
     @Test
     void testGet10BestPlayers() {
     }

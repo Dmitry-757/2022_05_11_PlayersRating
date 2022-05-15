@@ -1,25 +1,24 @@
 package org.dng;
 
-import org.junit.Before;
-//import org.junit.FixMethodOrder;
-import org.junit.BeforeClass;
+//import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-//import org.junit.runners.MethodSorters;
 
 import java.util.Set;
 
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class ServiceTest {
-    @BeforeClass
-    public static void setUp(){
+    private String nicName2;
+    @BeforeEach
+    public void setUp(){
         Service.Clear();
     }
 
     //    регистрирует игроков в системе (должна быть проверка, занят ли ник)
     @Test
     void t1_duplicatedPlayerRegisteringInSystem() {
-        Service.Clear();
+//        Service.Clear();
         String nicName = "Duplicatov";
         try {
             new Player(nicName);
@@ -33,7 +32,7 @@ class ServiceTest {
 
     @Test
     void t2_playerRegisteringInSystem() {
-        Service.Clear();
+//        Service.Clear();
         Player p1 = null;
         String nicName = "Petrov";
         try {
@@ -49,7 +48,7 @@ class ServiceTest {
 
     @Test
     void t3_gameRegisteringInSystem() {
-        Service.Clear();
+//        Service.Clear();
         Game game1 = null;
         try {
             game1 = new Game();
@@ -65,7 +64,7 @@ class ServiceTest {
 //    выводит список игр, в которые играют все игроки на сайте
     @Test
     void t4_getAllPlayersGamesList() {
-        Service.Clear();
+//        Service.Clear();
         Player p1 = null, p2 = null, p3 = null;
 
         try {
@@ -126,7 +125,7 @@ class ServiceTest {
 
     @Test
     void t7_PlayTheSameGameTwice() {
-        Service.Clear();
+//        Service.Clear();
         Player p1 = null, p2 = null;
 
         try {
@@ -146,7 +145,7 @@ class ServiceTest {
 
     @Test
     void t8_getPlayersRating() {
-        Service.Clear();
+//        Service.Clear();
         Player p1 = null, p2 = null, p3 = null;
 
         try {

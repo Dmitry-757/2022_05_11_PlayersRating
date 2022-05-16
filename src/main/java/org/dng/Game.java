@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class Game implements IGameService {
     private HashSet<Player> players = new HashSet<>();
-    private HashMap<Player, Integer> playerAndRating = new HashMap<>();
+    private HashMap<Player, Integer> playerAndRatingInGame = new HashMap<>();
     private String gameName;
     private boolean gamePlayed = false;
 
@@ -34,19 +34,17 @@ public class Game implements IGameService {
     /**
      * add player to storage of Players
      * structure SET is used to have only one instance of user
-     *
-     * @param pl - player
      */
     @Override
     public boolean addPlayer(Player pl) {
         if (pl != null) {
             players.add(pl);
             pl.addGame(this);
-            playerAndRating.put(pl, pl.getPlayerRating());//fix ratings of players, that takes part in this game
+            playerAndRatingInGame.put(pl, pl.getPlayerRating());//fix ratings of players, that takes part in this game
             Service.log("Game.addPlayer(player) player = `" + pl.getNicName() + "` done successfully");
             return true;
         } else
-            System.out.println("Cant add player. Player is undefined!");
+            System.out.println("Cant add player to game "+ gameName+". Player is undefined!");
         return false;
     }
 
@@ -55,7 +53,7 @@ public class Game implements IGameService {
     }
 
     public HashMap<Player, Integer> getPlayerAndRating() {
-        return playerAndRating;
+        return playerAndRatingInGame;
     }
 
     /**
@@ -95,7 +93,7 @@ public class Game implements IGameService {
 
         Player winner = ChooseWinner();
         Service.increaseRating(winner);
-        playerAndRating.put(winner, winner.getPlayerRating());//save rating for player in current game
+        playerAndRatingInGame.put(winner, winner.getPlayerRating());//save rating for player in current game
         this.gamePlayed = true;
 
         Service.log("Game.Play() winner = `" + winner.getNicName() + "` done successfully");

@@ -20,7 +20,6 @@ public class Service {
         Service.gameSet.add(game);
     }
 
-
     //get all games
     public static Set<Game> getGameSet() {
         return gameSet;
@@ -45,7 +44,7 @@ public class Service {
     }
 
     //выводит список игр, в которые играют все игроки на сайте
-    public static Set<Game> getAllPlayersGamesList(Set<Player> players) {
+    public static Set<Game> getAllPlayersGamesSet(Set<Player> players) {
         HashSet<Game> gamesSet = new HashSet<>();
         for (Player player : players) {
             gamesSet.addAll(player.getGamesSet());
@@ -60,13 +59,16 @@ public class Service {
     }
 
     //выводит 10 лучших игроков в определенной игре
-    public static List<Player> get10BestPlayers(Game game) {
-        return game.getPlayers().stream()
-//                .sorted((o1, o2) -> o1.getPlayerRating() - o2.getPlayerRating())
-                .sorted(Comparator.comparingInt(Player::getPlayerRating).reversed())
-//                .distinct()
+    public static HashMap<Player, Integer> get10BestPlayers(Game game) {
+        HashMap<Player, Integer> playerIntegerHashMap = game.getPlayerAndRating();
+
+        HashMap<Player, Integer> sortedHashMap = new HashMap<>();
+        playerIntegerHashMap
+                .entrySet().stream()
+                .sorted(Map.Entry.<Player,Integer>comparingByValue().reversed())
                 .limit(10)
-                .toList();
+                .forEachOrdered(x -> sortedHashMap.put(x.getKey(), x.getValue()));
+        return sortedHashMap;
     }
 
 

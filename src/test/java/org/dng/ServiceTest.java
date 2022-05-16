@@ -86,7 +86,7 @@ class ServiceTest {
         Assertions.assertTrue(Service.getPlayerSet().contains(p3));
 
         //get the set of all players and then the set of games that these players play
-        Set<Game> gs = Service.getAllPlayersGamesList(Service.getPlayerSet());
+        Set<Game> gs = Service.getAllPlayersGamesSet(Service.getPlayerSet());
         //checking if the game1 and game2 contained in the set of games
         Assertions.assertTrue(gs.contains(game1));
         Assertions.assertTrue(gs.contains(game2));

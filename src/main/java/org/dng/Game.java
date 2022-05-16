@@ -46,7 +46,7 @@ public class Game implements IGameService {
             Service.log("Game.addPlayer(player) player = `" + pl.getNicName() + "` done successfully");
             return true;
         } else
-            System.out.println("Cant add. Player is undefined!");
+            System.out.println("Cant add player. Player is undefined!");
         return false;
     }
 

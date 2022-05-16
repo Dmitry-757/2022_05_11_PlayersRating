@@ -12,13 +12,12 @@ class ServiceTest {
     private String nicName2;
     @BeforeEach
     public void setUp(){
-        Service.Clear();
+        Service.staticPropertiesClear();
     }
 
     //    регистрирует игроков в системе (должна быть проверка, занят ли ник)
     @Test
     void t1_duplicatedPlayerRegisteringInSystem() {
-//        Service.Clear();
         String nicName = "Duplicatov";
         try {
             new Player(nicName);
@@ -32,7 +31,6 @@ class ServiceTest {
 
     @Test
     void t2_playerRegisteringInSystem() {
-//        Service.Clear();
         Player p1 = null;
         String nicName = "Petrov";
         try {
@@ -48,7 +46,6 @@ class ServiceTest {
 
     @Test
     void t3_gameRegisteringInSystem() {
-//        Service.Clear();
         Game game1 = null;
         try {
             game1 = new Game();
@@ -64,7 +61,6 @@ class ServiceTest {
 //    выводит список игр, в которые играют все игроки на сайте
     @Test
     void t4_getAllPlayersGamesList() {
-//        Service.Clear();
         Player p1 = null, p2 = null, p3 = null;
 
         try {
@@ -125,7 +121,6 @@ class ServiceTest {
 
     @Test
     void t7_PlayTheSameGameTwice() {
-//        Service.Clear();
         Player p1 = null, p2 = null;
 
         try {
@@ -145,7 +140,6 @@ class ServiceTest {
 
     @Test
     void t8_getPlayersRating() {
-//        Service.Clear();
         Player p1 = null, p2 = null, p3 = null;
 
         try {

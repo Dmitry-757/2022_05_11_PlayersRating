@@ -10,7 +10,7 @@ public class Service {
     private static String log = "";
 
     //for tests
-    public static void Clear(){
+    public static void staticPropertiesClear(){
         playersNicSet.clear();
         gameSet.clear();
     }

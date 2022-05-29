@@ -59,16 +59,59 @@ public class Service {
     }
 
     //выводит 10 лучших игроков в определенной игре
-    public static HashMap<Player, Integer> get10BestPlayers(Game game) {
+    public static LinkedHashMap<Player, Integer> get10BestPlayers(Game game) {
         HashMap<Player, Integer> playerIntegerHashMap = game.getPlayerAndRating();
 
-        HashMap<Player, Integer> sortedHashMap = new HashMap<>();
+//        Player p1 = null, p2 = null, p3 = null, p4 = null;
+//        try {
+//            p1 = new Player("Petrov");
+//            p2 = new Player("Ivanov");
+//            p3 = new Player("Sidorov");
+//            p4 = new Player("Pupkin");
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//        HashMap<Player, Integer> playerIntegerHashMap = new HashMap<>();
+//        playerIntegerHashMap.put(p1,1);
+//        playerIntegerHashMap.put(p2,2);
+//        playerIntegerHashMap.put(p3,3);
+//        playerIntegerHashMap.put(p4,4);
+
+        LinkedHashMap<Player, Integer> sortedHashMap = new LinkedHashMap<>();
+
+//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
+//        playerIntegerHashMap
+//                .entrySet().stream()
+//                .sorted(Map.Entry.<Player,Integer>comparingByValue().reversed())
+//                .limit(10)
+//                .forEachOrdered(x -> System.out.println(x.getKey().getNicName()+" rating "+x.getValue()));
+//        ;
+//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
+
         playerIntegerHashMap
                 .entrySet().stream()
                 .sorted(Map.Entry.<Player,Integer>comparingByValue().reversed())
                 .limit(10)
                 .forEachOrdered(x -> sortedHashMap.put(x.getKey(), x.getValue()));
         return sortedHashMap;
+    }
+
+    //выводит 10 лучших игроков в определенной игре без использования стримов
+    public static TreeMap<Player, Integer> get10BestPlayersWithOutStream(Game game) {
+        HashMap<Player, Integer> playerIntegerHashMap = game.getPlayerAndRating();
+
+        Comparator<Player> valueComparator =  new Comparator<Player>() {
+            public int compare(Player k1, Player k2) {
+                int compare = playerIntegerHashMap.get(k2) - playerIntegerHashMap.get(k1);
+                if (compare == 0) return 1;
+                else return compare;
+            }
+        };
+
+        TreeMap<Player, Integer> sortedMap = new TreeMap<>(valueComparator);
+        sortedMap.putAll(playerIntegerHashMap);
+
+        return sortedMap;
     }
 
 

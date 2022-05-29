@@ -119,31 +119,51 @@ public class MainApp {
         else
             System.out.println("Oops! There is no games!");
 
-        //System.out.println("******************************************************************************************");
-
-
-//    выводит 10 лучших игроков с учетом всех игр
-//        Service.staticPropertiesClear();
+        System.out.println("******************************************************************************************");
         System.out.println();
-        System.out.println("The data for the test was prepared in the previous step");
-        System.out.println("Print 10 best players in all games");
 
+        System.out.println("Print 10 best players in chosen game (game_3) variant 2");
         if (Service.getGameSet().size()>0){
-            System.out.println("The 10 best players in all games are: ");
+            //Game chosenGame = Service.getGameSet().stream().toList().get(3);
+            Set<Game> gs = Service.getGameSet();
+            Game chosenGame = gs.stream()
+                    .filter(g->g.getGameName().contains("game_3"))
+                    .toList()
+                    .get(0);
+
+            System.out.println();
+            System.out.println("The 10 best players in "+chosenGame.getGameName()+" are:");
             System.out.print("| ");
-//            Service.get10BestPlayers(Service.getGameSet()).forEach(p-> System.out.print(p.getNicName()+" | " ));
-            Service.get10BestPlayers(Service.getGameSet()).forEach(p-> System.out.print(p.getNicName()+" rating = "+p.getPlayerRating()+" | " ));
+            TreeMap<Player, Integer> sortedMap = Service.get10BestPlayersWithOutStream(chosenGame);
+            sortedMap.forEach((p,r)-> System.out.print(p.getNicName()+" rating = "+r+" | " ));
             System.out.println();
         }
         else
             System.out.println("Oops! There is no games!");
 
+        //System.out.println("******************************************************************************************");
 
-        System.out.println("*******************************************************************************************");
-        System.out.println("*******************************************************************************************");
-        System.out.println("*******************************************************************************************");
-        System.out.println("....................log of methods working....................");
-        Service.logPrint();
+
+//    выводит 10 лучших игроков с учетом всех игр
+//        System.out.println();
+//        System.out.println("The data for the test was prepared in the previous step");
+//        System.out.println("Print 10 best players in all games");
+//
+//        if (Service.getGameSet().size()>0){
+//            System.out.println("The 10 best players in all games are: ");
+//            System.out.print("| ");
+//            Service.get10BestPlayers(Service.getGameSet()).forEach(p-> System.out.print(p.getNicName()+" rating = "+p.getPlayerRating()+" | " ));
+//            System.out.println();
+//        }
+//        else
+//            System.out.println("Oops! There is no games!");
+
+
+//        System.out.println("*******************************************************************************************");
+//        System.out.println("*******************************************************************************************");
+//        System.out.println("*******************************************************************************************");
+//        System.out.println("....................log of methods working....................");
+//        Service.logPrint();
     }
 
 }

@@ -11,6 +11,7 @@ import java.util.Random;
  * - uniqueness (it can be only once)
  * - has at least two players
  */
+
 public class Game implements IGameService {
     private HashSet<Player> players = new HashSet<>();
     private HashMap<Player, Integer> playerAndRatingInGame = new HashMap<>();
